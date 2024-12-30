@@ -1,0 +1,226 @@
+% ============================================================================= %
+%                           GEOMETRY                                            %
+% ============================================================================= %
+
+\ProvidesPackage{mystyle}[2024/12/30 Custom LaTeX Style]
+\RequirePackage[margin=1in]{geometry}
+
+% ============================================================================= %
+%                           GRAPHICS                                            %
+% ============================================================================= %
+
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{tkz-tab}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes.geometric, arrows}
+\RequirePackage{varwidth}
+\RequirePackage[most]{tcolorbox}
+\tcbuselibrary{listings}
+\usetikzlibrary{shadows, shadows.blur, shapes.misc, positioning}
+
+% ============================================================================= %
+%               COLOURS AND LINKS                                               %
+% ============================================================================= %
+
+\RequirePackage{xcolor}
+\definecolor{mycolor}{RGB}{38, 168, 148}
+
+\definecolor{linkscolor}{RGB}{4, 36, 58}
+\RequirePackage{hyperref}
+\hypersetup{
+    colorlinks,
+    linkcolor=linkscolor,
+    linktoc=all
+}
+
+% ============================================================================= %
+%               WRITING PACKAGES AND COMMANDS                                   %
+% ============================================================================= %
+
+\usepackage[utf8]{inputenc}
+\RequirePackage{lipsum}
+\RequirePackage{csquotes}
+\RequirePackage{enumerate}
+\RequirePackage[shortlabels, inline]{enumitem}
+\RequirePackage{subfiles}
+
+% ============================================================================= %
+%               HEADER AND FOOTER                                               %
+% ============================================================================= %
+
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[RO, LE]{%
+    \tikz[baseline=(char.base)]{
+        \node[shape=rectangle, fill=black, text=white, inner sep=2pt] (char) {\thepage};
+    }
+}
+
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{4pt}
+\fancyfoot{}
+
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\renewcommand{\headrulewidth}{4pt}
+\fancyfoot{}
+
+\fancypagestyle{frontpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \vspace*{1\baselineskip}
+    \fancyhead[R]{York University \linebreak Joe Tran, 2024 \vspace*{0.5\baselineskip}}
+}
+
+\makeatletter
+\@addtoreset{chapter}{part}
+
+\RequirePackage[titles]{tocloft}
+\RequirePackage{titletoc}
+\newcommand{\chaptertoc}{%
+    \startcontents[chapters]
+    \printcontents[chapters]{}{1}{\setcounter{tocdepth}{1}}
+    \vspace{0.5cm}
+}
+
+\newcommand{\intro}[1]{
+    \noindent
+    \begin{minipage}[t]{0.48\textwidth}
+        \chaptertoc
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        #1
+    \end{minipage}
+    \newpage
+}
+
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{titlesec}
+
+\titleformat{\chapter}[display]{\centering\normalfont\Huge}{\titlerule[5pt]\vspace{3pt}\titlerule[2pt]\vspace{3pt}\textbf{\chaptername \ \thechapter}}{0pt}{\titlerule[2pt]\vspace{1pc}\Huge{\textsc{#1}}}
+
+\titleformat{name=\chapter, numberless}[display]{\centering\normalfont\Huge}{\titlerule[2pt]\vspace{-20pt}}{0pt}{\Huge{#1}\addcontentsline{toc}{chapter}{#1}}
+
+% ============================================================================= %
+%               TABLES AND FIGURES                                              %
+% ============================================================================= %
+
+\RequirePackage{subcaption}
+\RequirePackage{chngcntr}
+\renewcommand{\thefigure}{\thepart.\thechapter.\thesection.\arabic{figure}}
+\counterwithin{table}{chapter}
+\counterwithin{figure}{chapter}
+\counterwithin{equation}{chapter}
+
+\RequirePackage{array}
+\RequirePackage[rightcaption]{sidecap}
+\RequirePackage{wrapfig}
+\RequirePackage{float}
+\RequirePackage[labelfont=bf]{caption}
+\RequirePackage{makecell}
+\RequirePackage{hhline}
+
+% ============================================================================= %
+%               MATH PACKAGES AND COMMANDS                                      %
+% ============================================================================= %
+
+\RequirePackage{amsfonts, amssymb, amsmath, amsthm, mathrsfs, thmtools}
+\tcbuselibrary{theorems, skins, breakable}
+
+\RequirePackage{mathtools}
+\RequirePackage{dsfont}
+
+\newcommand{\1}{\mathds{1}}
+
+% Script fonts use \AA
+
+\renewcommand{\AA}{\mathcal{A}}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\EE}{\mathcal{E}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\GG}{\mathcal{G}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\II}{\mathcal{I}}
+\newcommand{\JJ}{\mathcal{J}}
+\newcommand{\KK}{\mathcal{K}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\PP}{\mathcal{P}}
+\newcommand{\QQ}{\mathcal{Q}}
+\newcommand{\RR}{\mathcal{R}}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\UU}{\mathcal{U}}
+\newcommand{\VV}{\mathcal{V}}
+\newcommand{\WW}{\mathcal{W}}
+\newcommand{\XX}{\mathcal{X}}
+\newcommand{\YY}{\mathcal{Y}}
+\newcommand{\ZZ}{\mathcal{Z}}
+
+% Blackboard fonts use \A
+
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\G}{\mathbb{G}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\K}{\mathbb{K}}
+\renewcommand{\L}{\mathbb{L}}
+\newcommand{\M}{\mathbb{M}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\O}{\mathbb{O}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\W}{\mathbb{W}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Operators
+
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Syl}{Syl}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Range}{Range}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator*{\esssup}{ess \ sup}
+\DeclareMathOperator{\bc}{bc}
+
+% Deliminiters
+
+\newcommand{\vertiii}[1]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1 \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
+
+% Constructs
+
+\renewcommand{\bar}{\overline}
+\renewcommand{\vec}{\overrightarrow}
+\renewcommand{\tilde}{\widetilde}
+\renewcommand{\hat}{\widehat}
+
+% Arrows
+
+\newcommand{\wto}{\rightharpoonup}
+\newcommand{\wsto}{\overset{*}{\rightharpoonup}}
