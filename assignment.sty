@@ -1,9 +1,13 @@
 \ProvidesPackage{mystyle}[2024/12/30 Custom LaTeX Style]
 \usepackage[utf8]{inputenc}
 \RequirePackage[margin=1in]{geometry}
-\RequirePackage{amsfonts, amssymb, amsmath, amsthm, booktabs, hyperref, pgfplots, tikz, xcolor, setspace}
+\RequirePackage{amsfonts, amssymb, amsmath, amsthm, booktabs, hyperref, pgfplots, tikz, xcolor, setspace, mathrsfs}
 
-\linespread{1.1}
+\allowdisplaybreaks[4]
+
+\linespread{1.15}
+
+\setlength{\parskip}{5pt}
 
 \newcommand\RedeclareMathOperator{%
   \@ifstar{\def\rmo@s{m}\rmo@redeclare}{\def\rmo@s{o}\rmo@redeclare}%
@@ -94,6 +98,7 @@
 \renewcommand{\Im}{\mathrm{Im}}
 \DeclareMathOperator{\sgn}{sgn}
 \newcommand{\Wedge}{\bigwedge}
+\renewcommand{\c}{\complement}
 
 \renewcommand{\bar}{\overline}
 \renewcommand{\vec}{\overrightarrow}
